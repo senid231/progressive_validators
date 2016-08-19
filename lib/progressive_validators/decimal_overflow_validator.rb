@@ -18,11 +18,10 @@ class DecimalOverflowValidator < ActiveRecordChangedValidator
   def validate_changed_attribute(record, attribute)
     column_hash = record.class.columns_hash[attribute]
 
-    if column_hash && column_hash.type == :decimal && record[attribute] && column_hash.precision
-
-      precision = detect_precision(column_hash, record, attribute)
-
-      if precision > column_hash.precision
+    if column_hash && column_hash.type == :decimal && record[attribute]
+      begin
+        column_hash.cast_type.type_cast_for_database(record[attribute])
+      rescue RangeError => _
         record.errors.add(attribute, @options[:message] || :is_out_of_range)
       end
     end
