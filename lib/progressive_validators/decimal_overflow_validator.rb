@@ -23,7 +23,7 @@ module ProgressiveValidators
         begin
           column_hash.cast_type.type_cast_for_database(record[attribute])
         rescue RangeError => _
-          record.errors.add(attribute, @options[:message] || :is_out_of_range)
+          record.errors.add(attribute, (@options[:message] || :out_of_range), default: 'is out of range')
         end
       end
     end
