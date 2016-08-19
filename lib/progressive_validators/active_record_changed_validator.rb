@@ -5,7 +5,7 @@ module ProgressiveValidators
     # validates_with DecimalOverflowValidator, message: 'exceeds limit'
     # validates_with DecimalOverflowValidator, message: proc { |column, value| "#{value} is out of range" }
     def validate(record)
-      return unless validator_allowable?
+      return unless validator_allowable?(record)
 
       record.changed.each do |changed_attribute|
         validate_changed_attribute(record, changed_attribute)
