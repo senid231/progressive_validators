@@ -1,5 +1,6 @@
 require 'progressive_validators/version'
+require 'progressive_validators/decimal_overflow_validator'
+require 'progressive_validators/integer_overflow_validator'
 
 module ProgressiveValidators
-  # Your code goes here...
 end
